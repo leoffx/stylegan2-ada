@@ -225,8 +225,11 @@ def training_loop(
             img_path = os.path.join(config.GDRIVE_PATH, 'images', ('iter_%08d.png' % (cur_nimg)))
             save_image(img_path, orin_recon)
 
+        if cur_nimg >= tick_start_nimg + 65000:
             cur_tick += 1
             tick_start_nimg = cur_nimg
+
+
 
             if cur_tick % network_snapshot_ticks == 0:
                 pkl = os.path.join(submit_config.run_dir, 'encoder-snapshot-%08d.pkl' % (cur_nimg))
