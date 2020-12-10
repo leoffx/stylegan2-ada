@@ -6,21 +6,16 @@ import copy
 
 def main():
     parser = argparse.ArgumentParser(description='Training the in-domain encoder')
-    parser.add_argument('training_data', type=str,
-                        help='path to training data (.tfrecords).')
-    parser.add_argument('test_data', type=str,
-                        help='path to test data (.tfrecords).')
-    parser.add_argument('decoder_pkl', default=str,
-                        help='path to the stylegan generator, which serves as a decoder here.')
-    parser.add_argument('--num_gpus', type=int, default=8,
+    parser.add_argument('--num_gpus', type=int, default=1,
                         help='Number of GPUs to use during training (defaults: 8)')
-    parser.add_argument('--image_size', type=int, default=256,
-                        help='the image size in training dataset (defaults; 256)')
+    parser.add_argument('--image_size', type=int, default=512,
+                        help='the image size in training dataset (defaults; 512)')
     parser.add_argument('--dataset_name', type=str, default='ffhq',
                         help='the name of the training dataset (defaults; ffhq)')
     parser.add_argument('--mirror_augment', action='store_false',
                         help='Mirror augment (default: True)')
     args = parser.parse_args()
+    args.image_size = config.RESOLUTION
 
     train           = EasyDict(run_func_name='training.training_loop_encoder.training_loop')
     Encoder         = EasyDict(func_name='training.networks_encoder.Encoder')
@@ -29,8 +24,8 @@ def main():
     E_loss          = EasyDict(func_name='training.loss_encoder.E_loss', feature_scale=0.00005, D_scale=0.08, perceptual_img_size=256)
     D_loss          = EasyDict(func_name='training.loss_encoder.D_logistic_simplegp', r1_gamma=10.0)
     lr              = EasyDict(learning_rate=0.0001, decay_step=30000, decay_rate=0.8, stair=False)
-    Data_dir        = EasyDict(data_train=args.training_data, data_test=args.test_data)
-    Decoder_pkl     = EasyDict(decoder_pkl=args.decoder_pkl)
+    Data_dir        = EasyDict(data_train=config.DATA_DIR, data_test=config.DATA_DIR)
+    Decoder_pkl     = EasyDict(decoder_pkl=config.GENERATOR_DIR)
     tf_config       = {'rnd.np_random_seed': 1000}
     submit_config   = dnnlib.SubmitConfig()
 

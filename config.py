@@ -16,3 +16,16 @@ cache_dir = 'cache'
 run_dir_ignore = ['results', 'datasets', 'cache']
 
 #----------------------------------------------------------------------------
+DESC = ""
+GDRIVE_PATH = "/content/drive/MyDrive/results"
+
+RESOLUTION = 512
+DATA_DIR = "/content/idinvert/datasets/bonsai"
+GENERATOR_DIR = "/content/drive/MyDrive/results/network-snapshot-002364.pkl"
+ENCODER_PICKLE_DIR = None
+
+# only for generator training
+TIME = 0
+KIMG = 2364
+
+INCEPTION_PATH = '/content/inception_v3_features.pkl'

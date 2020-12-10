@@ -97,7 +97,7 @@ def training_loop(
                   mirror_augment          = False,
                   filter                  = 64,        # Minimum number of feature maps in any layer.
                   filter_max              = 512,       # Maximum number of feature maps in any layer.
-                  resume_run_id           = None,      # Run ID or network pkl to resume training from, None = start from scratch.
+                  resume_run_id           = config.ENCODER_PICKLE_DIR,      # Run ID or network pkl to resume training from, None = start from scratch.
                   resume_snapshot         = None,      # Snapshot index to resume training from, None = autodetect.
                   image_snapshot_ticks    = 1,         # How often to export image snapshots?
                   network_snapshot_ticks  = 10,         # How often to export network snapshots?
@@ -202,7 +202,6 @@ def training_loop(
             sys.stdout.flush()
             tflib.autosummary.save_summaries(summary_log, it)
 
-        if cur_nimg >= tick_start_nimg + 65000:
             cur_tick += 1
             tick_start_nimg = cur_nimg
 
