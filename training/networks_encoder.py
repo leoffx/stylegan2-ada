@@ -317,7 +317,7 @@ def Encoder(
             filter_max       = 512,    # Maximum number of feature maps in any layer.
             num_layers       = 14,     # Number of layers in in G_synthesis().
             is_training      = True,   # Whether or not the layer is in training mode?
-            num_gpus         = 8,      # Number of gpus to use
+            num_gpus         = 1,      # Number of gpus to use
             dlatent_size     = 512,    # Disentangled latent (W) dimensionality.
             s0               = 4,      # Base number to decide how many residual block in encoder.
             **kwargs):
