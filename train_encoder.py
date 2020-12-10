@@ -12,7 +12,7 @@ E_opt           = EasyDict(beta1=0.9, beta2=0.99, epsilon=1e-8)
 D_opt           = EasyDict(beta1=0.9, beta2=0.99, epsilon=1e-8)
 E_loss          = EasyDict(func_name='training.loss_encoder.E_loss', feature_scale=0.00005, D_scale=0.05, perceptual_img_size=256)
 D_loss          = EasyDict(func_name='training.loss_encoder.D_logistic_simplegp', r1_gamma=10.0)
-lr              = EasyDict(learning_rate=0.0001, decay_step=30000, decay_rate=0.8, stair=False)
+lr              = EasyDict(learning_rate=0.00001, decay_step=30000, decay_rate=0.8, stair=False)
 Data_dir        = EasyDict(data_train=config.DATA_DIR, data_test=config.DATA_DIR)
 Decoder_pkl     = EasyDict(decoder_pkl=config.PICKLE_DIR)
 tf_config       = {'rnd.np_random_seed': 1000}
@@ -35,7 +35,7 @@ dataset = 'ffhq';           desc += '-ffhq';             train.mirror_augment = 
 
 z_dim = 512
 
-minibatch_per_gpu_train = {64: 32, 128: 16, 256: 16, 512: 8, 1024: 4}
+minibatch_per_gpu_train = {64: 16, 128: 8, 256: 8, 512: 4, 1024: 2}
 minibatch_per_gpu_test  = {64: 1, 128: 1, 256: 1, 512: 1, 1024: 1}
 
 assert image_size in minibatch_per_gpu_train, 'Invalid image size'
